@@ -1,17 +1,27 @@
 .css {
-    background:Blue;
-    text-align:center;
+    background: Blue;
+    text-align: center;
+}
+
+.background {
+    background-color: green;
 }
 
 .blue-border {
-    border-color:blue;
-    border-width:5px;
-    border-style:dashed;
-    border-radius:0px;
+    border-color: blue;
+    border-width: 5px;
+    border-style: dashed;
+    border-radius: 0px;
 }
- p {font-size: 15px;
-    border-style:solid;
-    border-color:blue;
-    border-radius:0px; 
-    border-width:2px; 
- }
+
+p {
+    font-size: 15px;
+    border-style: solid;
+    border-color: blue;
+    border-radius: 0px;
+    border-width: 2px;
+}
+
+.cpu {
+    height: 200px;
+}
