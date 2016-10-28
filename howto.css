@@ -1,3 +1,16 @@
 .css {
     
 }
+
+#navbar {
+    background:Blue;
+    text-align:center;
+}
+
+
+#navbar li {
+    display:inline-block;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid purple;
+    background-color: black;
