@@ -1,38 +1,61 @@
-<!DOCTYPE html>
-<html> 
-<link>
+<!doctype html>
+<html lang="en">
 <head>
-<title>HTML Calculator</title>
+   <style>
+    #navbar {
+    background:Blue;
+    text-align:center;
+}
+
+#navbar li {
+    display:inline-block;
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid purple;
+    background-color: black;
+}
+.blue-border {
+    border-color:blue;
+    border-width:5px;
+    border-style:dashed;
+    border-radius:0px;
+}
+</style> 
+
+    <meta charset="UTF-8">
+    <title>My Calculator</title>
 </head>
- <ul id="navbar">
+    <body bgcolor= "#000000" text= "blue">
+  <ul id="navbar">
             <li> <a href="index.html"> About Me </a></li>
             <li> <a href="hardware.html"> Hardware </a></li>
-            <li> <a href="calculator.htm"> Calculator </a></li>
+            <li> <a href="calculator.html"> Calculator </a></li>
             <li> <a href="howto.html"> How to </a></li>
             <li> <a href="#"> Vindinium </a></li>
             <li> <a href="#"> Big Project </a></li>
         </ul>
         <h1 class="blue-border"></h1>
-<body bgcolor= "#800000" text= "white">
-<form name="calculator" >
-<input type="button" value="1" onClick="document.calculator.ans.value+='1'">
-<input type="button" value="2" onClick="document.calculator.ans.value+='2'">
-<input type="button" value="3" onClick="document.calculator.ans.value+='3'">
-<input type="button" value="4" onClick="document.calculator.ans.value+='4'">
-<input type="button" value="5" onClick="document.calculator.ans.value+='5'">
-<input type="button" value="6" onClick="document.calculator.ans.value+='6'">
-<input type="button" value="7" onClick="document.calculator.ans.value+='7'">
-<input type="button" value="8" onClick="document.calculator.ans.value+='8'">
-<input type="button" value="9" onClick="document.calculator.ans.value+='9'">
-<input type="button" value="0" onClick="document.calculator.ans.value+='0'">
+        <div class="row">
+            
+<center><h1>Calculator</h1></center>    
+<center><p>3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111...Whatever just use the calculator</p></center>
+<center><input type="text" id="input"></center>
 
-<input type="button" value="-" onClick="document.calculator.ans.value+='-'">
-<input type="button" value="*" onClick="document.calculator.ans.value+='*'">
-<input type="button" value="/" onClick="document.calculator.ans.value+='/'">
-<input type="button" value="+" onClick="document.calculator.ans.value+='+'">
-<input type="reset" value="Reset">
-<input type="button" value="=" onClick="document.calculator.ans.value=eval(document.calculator.ans.value)">
-<br>Solution is <input type="textfield" name="ans" value="">
-</form>
+   <center> <select id=select> </center>
+        <option> + </option>
+        <option> - </option>
+        <option> * </option>
+        <option> / </option>
+        <option> ^ </option>
+        <option> &radic;<span style="text-decoration: overline">x</span> </option>
+    </select>
+<center><input type="text" id="input2"></center>
+
+<center> <button id="button">Calculate</button> </center>
+
+<div> id="answer"> Answer:</div>
+<script src="calculator.js"></script>
+
+
 </body>
 </html>
