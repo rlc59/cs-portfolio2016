@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="todolist.css" type="text/css" /> 
 <style>
         #navbar {
-    background:Maroon;
+    background:black;
     text-align:center;
 }
 
@@ -22,7 +22,7 @@
     border-radius:0px;
 }
 </style>
-  <body bgcolor= "#800000" text= "white">
+  <body bgcolor= "#351717" text= "white">
   <ul id="navbar">
             <li> <a href="index.html"> About Me </a></li>
             <li> <a href="hardware.html"> Hardware </a></li>
@@ -33,23 +33,29 @@
         </ul>
         <h1 class="blue-border"></h1>
         <div class="row">
-    <center><h1> To Do List </h1></center>
+    <center><h1> To Do List </h1></center> 
+    <center><p>Red = Urgent <br> Yellow = 3 Day Warning <br> White = 2 Day Warning <br> Blue = 1 Day Warning <br> Underline and Bold = Prioritize Events</p></center>
     <meta charset="UTF-8">
     <title>To Do List</title>
+   
 </head>
 <body>
     
-<center><input type="text" name="list"/>
+<center><input type="text" id="inputbar"/>
     <select id=options>
-        <option> none </option>
-        <option> underline </option>
-        <option> bold </option>
-        <option> red </option>
-        <option> strikethrough </option>
+        <option> </option>
+        <option value="blue"> blue </option>
+        <option value="white"> white </option>
+        <option value="red"> red</option> 
+        <option value="underline">underline</option>
+        <option value="bold">bold</option>
+        <option value="yellow">yellow</option>
+        
 </select></center>
+<div id="todo"></div>
 <br>
 <center> <button id="submit">Submit</button> </center>
-<center> <button id="&#x2326;">Delete</button></center>
+<center> <button id="remove">Remove</button> </center>
 </body>
 <script src="todolist.js"></script>
 </html>
