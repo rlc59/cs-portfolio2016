@@ -3,6 +3,11 @@
     text-align:center;
 }
 
+#navbar {
+    background:Blue;
+    text-align:center;
+}
+
 
 #navbar li {
     display:inline-block;
