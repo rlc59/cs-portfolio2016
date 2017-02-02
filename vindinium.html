@@ -3,7 +3,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="todolist.css" type="text/css" />
-    <title> How to make Calculator </title>
+    <title> How to make a Vindinium Bot </title>
 </head>
 <style>
     #navbar {
@@ -40,9 +40,143 @@
         <li> <a href="#"> Big Project </a></li>
     </ul>
 <h1>How to Make My Vindinium Bot</h1>
+<h2> What is Vindinium?</h2>
+<IMG HEIGHT="400" WIDTH="600" SRC="vin.png"> <IMG HEIGHT="400" WIDTH="600" SRC="vinw.png">
+<p>Vindinium is an online gaming platform where 4 bots made by you and other people battle for the most gold. You get this gold by gaining gold mines throughout the multiple maps but there is a risk to getting this gold. Your bot has 100 health and you lose 20 health when claiming a free or enemy mine. You will gain back 50 health when going to the tavern at the cost of 2 of the gold you obtained. When attacking an enemy bot you deal 20 damage. The game last 1200 turns which may seem like a lot but the game ends really quickly and the bot with the most amount of gold wins.</p>
+<h2>My Bot</h2>
+<p> Please read my code because throughout it I left comments explaing what my code is and what it does</p>
+<p>var Bot = require('bot');
+<br>
+var PF = require('pathfinding');<br>
+
+<h5>These 2 lines below are for changing where to play your bot either in the arena against other players or against computer generated bots. In this code I have arena set up. It does this by having your bots key directed to whichever server you are on and what gamemode you want to attend whether that is training or arena. To switch back and forth between vindinium.org and a private server use the '//' sign which comments the line of code out</h5>
+//var bot = new Bot('p30rg9l0', 'training', 'vindinium.org'); <br>
+var bot = new Bot('p30rg9l0', 'arena', 'http://52.39.33.197:9000'); <br>
+var goDir;<br>
+var Promise = require('bluebird');<br>
+Bot.prototype.botBrain = function() {<br>
+    return new Promise(function(resolve, reject) {<br>
+        _this = bot;<br>
+        //////* Write your bot below Here *//////<br>
+        //////* Set `myDir` in the direction you want to go and then bot.goDir is set to myDir at the bottom *////////<br>
+
+        /*                                      *<br>
+         * This Code is global data!            *<br>
+         *                                      */<br>
+        <br>
+        <h5>This code below tells the bot where to go and where the enemy bots and mines are.</h5><br>
+        var myDir;<br>
+        var myPos = [bot.yourBot.pos.x, bot.yourBot.pos.y];<br>
+
+
+        var enemyBots = [];<br>
+        if (bot.yourBot.id != 1) enemyBots.push(bot.bot1);<br>
+        if (bot.yourBot.id != 2) enemyBots.push(bot.bot2);<br>
+        if (bot.yourBot.id != 3) enemyBots.push(bot.bot3);<br>
+        if (bot.yourBot.id != 4) enemyBots.push(bot.bot4);<br>
+
+        var enemyMines = [];<br>
+        if (bot.yourBot.id != 1) enemyMines = enemyMines.concat(bot.bot1mines);<br>
+        if (bot.yourBot.id != 2) enemyMines = enemyMines.concat(bot.bot2mines);<br>
+        if (bot.yourBot.id != 3) enemyMines = enemyMines.concat(bot.bot3mines);<br>
+        if (bot.yourBot.id != 4) enemyMines = enemyMines.concat(bot.bot4mines);<br>
+         
+        <br>
+        <h5> The code below finds the closest enemybot by using coordinates</h5><br>
+
+        var closestBot = enemyBots[0];<br>
+        for (i = 0; i < enemyBots.length; i++) {<br>
+            if (bot.findDistance(myPos, [closestBot.pos.x, closestBot.pos.y]) > bot.findDistance(myPos, [enemyBots[i].pos.x, enemyBots[i].pos.y])) {<br>
+                closestBot = enemyBots[i];<br>
+            }<br>
+
+        }<br>
+        /*                                      *<br>
+         * This Code Decides WHAT to do         *<br>
+         *                                      */<br>
+<br>
+        <h5>This code tells my bot when to do the actions such as get health, gold, attack other bots, or attack enemy mines. </h5> <br>
+
+        var task;<br>
+        if (bot.yourBot.life <= 30) {<br>
+            task = "taverns";<br>
+        }<br>
+        else if (bot.yourBot.life >= 50) {<br>
+            task = "freemines";<br>
+        }
+        else if (bot.yourBot.life >= 70) {<br>
+            task = "attackMines";<br>
+        }<br>
+        else {<br>
+            task = "attack";<br>
+        }<br>
 
 
 
+        /*                                      *<br>
+         * This Code Determines HOW to do it    *<br>
+         *                                      */<br>
+<br>
+        <h5></h5>This Code find the nearest freemine and sets myDir toward that direction to get the gold from the mines. The meaning for console.log is when you run your code on terminal it will display what you wrote on the console when yuor bot does the action. In this task when your bot claims a freemine the terminal will display 'Claiming a Free Mine!'</h5><br>
+        if (task === "freemines") {<br>
+            var closestMine = bot.freeMines[0];<br>
+            for (i = 0; i < bot.freeMines.length; i++) {<br>
+                if (bot.findDistance(myPos, closestMine) > bot.findDistance(myPos, bot.freeMines[i])) {<br>
+                    closestMine = bot.freeMines[i];<br>
+                }<br>
+            }<br>
+            console.log("Claiming a Free Mine!");<br>
+            myDir = bot.findPath(myPos, closestMine);<br>
+        }<br>
+        <h5>This code detects and finds the closest enemy bot and attacks that enemy bot</h5> <br>
+        if (task === "attack") {<br>
+            console.log("Attacking nearest bot!");<br>
+            myDir = bot.findPath(myPos, [closestBot.pos.x, closestBot.pos.y]);<br>
+        }<br>
+        <h5>This code determines where my bot should go to a tavern to regain health</h5><br>
+        if (task === "taverns") {<br>
+            var closestTavern = bot.taverns[0];<br>
+            for (i = 0; i < bot.taverns.length; i++) {<br>
+                if (bot.findDistance(myPos, closestTavern) > bot.findDistance(myPos, bot.taverns[i])) {<br>
+                    closestTavern = bot.taverns[i];<br>
+                }<br>
+            }<br>
+            console.log("taverns");<br>
+            myDir = bot.findPath(myPos, closestTavern);<br>
+        }<br>
+        <h5>This code tells my bot to attack enemy mines</h5><br>
+        if (task === "attackMines") {<br>
+            var attackMines = enemyMines[0];<br>
+            for (i = 0; i < enemyMines.length; i++) {<br>
+                if (bot.findDistance(myPos, attackMines) > bot.findDistance(myPos, enemyMines[i])) {<br>
+                    enemyMines = attackMines[i];<br>
+                }<br>
+            }<br>
+            console.log("Get Enemy Money");<br>
+            myDir = bot.findPath(myPos, attackMines);<br>
+        }<br>
+        /*                                                                                                                              *<br>
+         * This Code Sets your direction based on myDir.  If you are trying to go to a place that you can't reach, you move randomly.   *<br>
+         * Otherwise you move in the direction set by your code.  Feel free to change this code if you want.                            */<br>
+        if (myDir === "none") {<br>
+            console.log("Going Random!");<br>
+            var rand = Math.floor(Math.random() * 4);<br>
+            var dirs = ["north", "south", "east", "west"];<br>
+            bot.goDir = dirs[rand];<br>
+        }<br>
+        else {<br>
+            bot.goDir = myDir;<br>
+        }<br>
+        ///////////* DON'T REMOVE ANTYTHING BELOW THIS LINE *//////////////<br>
+        resolve();<br>
+    });<br>
+};<br>
+bot.runGame();<br>
+</p>
+<h2>Meaning of my Code</h2>
+<p>The code above shows the code I ran for my vindinium bot. I made different/situational tasks for my bot such as taverns for going to taverns when my health went below 31, freemines for going to mine that arent taken when my health was above 49, enemymines for going to enemymines when my health was above 69 and attack which is for attack people if none of the rest apply. My made my bot like this because I have a good balance between defence and offence. I will get mines when I my health is between 50-70, I will go to the tavern when my health is below 30 otherwise I will attack other bots no matter how far they are. </p>
+<h2>What I Learned in this project</h2>
+<p>I learned a lot about coding in this project it made many things click but it is still very difficult to code without a little help. I was able to get my bot exactly the way I wanted to make it. My bot was very simple but very effective at the same time. It has beaten many other people and is a force to be reckoned with. Before this experience I have taken AI for granted because in todays society they are just there but people don't usually appreciate what work and time it takes to make one. Now I know what challenges we have to overcome to make one and I only made a basic one. I can't imagine what it takes to make AI like Siri or Kortana.</p>
 </body>
     <h1 class="blue-border"></h1>
     <div class="row"> </div>
