@@ -6,7 +6,7 @@ var dropdown = document.getElementById("select");
 var num5Input = document.getElementById("answer");
 var answer;
 
-button.addEventListener("click", calcfunction)
+button.addEventListener("click", calcfunction); 
 //This code below tells the computer the value of the 2 inputs 
 function calcfunction() {
     var num1 = parseInt(num1Input.value);
